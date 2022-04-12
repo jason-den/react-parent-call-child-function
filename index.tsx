@@ -18,7 +18,8 @@ const Child = ({ setCallbackOnTaskCreated }) => {
 
   useEffect(() => {
     setCallbackOnTaskCreated(onTaskCreated);
-  }, []);
+  }, [taskURL]);
+
   return (
     <div style={{ borderStyle: 'solid', margin: '5px', padding: '5px' }}>
       current Task URL: {taskURL}
