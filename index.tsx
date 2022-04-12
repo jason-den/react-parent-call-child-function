@@ -8,7 +8,7 @@ interface AppState {
   name: string;
 }
 
-type TaskURL = { url: '/big-task' } | { url: '/small-task' };
+type TaskURL = { url: '/big-task' | '/small-task' };
 
 const Child = ({ setCallbackOnTaskCreated }) => {
   const [taskURL, setTaskURL] = useState<TaskURL>({ url: '/big-task' });
@@ -24,13 +24,10 @@ const Child = ({ setCallbackOnTaskCreated }) => {
     <div style={{ borderStyle: 'solid', margin: '5px', padding: '5px' }}>
       current Task URL: {taskURL.url}
       <button
-        onClick={() =>
-          setTaskURL(
-            taskURL.url === '/big-task'
-              ? { url: '/small-task' }
-              : { url: '/big-task' }
-          )
-        }
+        onClick={() => {
+          if (taskURL.url === '/big-task') taskURL.url = '/small-task';
+          else taskURL.url = '/big-task';
+        }}
       >
         toggle task type
       </button>
