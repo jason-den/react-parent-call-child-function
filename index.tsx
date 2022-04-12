@@ -50,12 +50,10 @@ class App extends Component<AppProps, AppState> {
   };
 
   render() {
-    const { onTaskCreated } = this.state;
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         This is parent
         <button onClick={this.createTask}>create task</button>
-        <div>onTaskCreated: {JSON.stringify(onTaskCreated)}</div>
         <div>
           This is Child.
           <Child setCallbackOnTaskCreated={this.setCallbackOnTaskCreated} />
