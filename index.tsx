@@ -8,24 +8,28 @@ interface AppState {
   name: string;
 }
 
-type TaskURL = '/big-task' | '/small-task';
+type TaskURL = { url: '/big-task' } | { url: '/small-task' };
 
 const Child = ({ setCallbackOnTaskCreated }) => {
-  const [taskURL, setTaskURL] = useState<TaskURL>('/big-task');
+  const [taskURL, setTaskURL] = useState<TaskURL>({ url: '/big-task' });
 
   // log as simulation for history.push(redirectionRoute)
   const onTaskCreated = () => console.log('redirectionRoute:', taskURL);
 
   useEffect(() => {
     setCallbackOnTaskCreated(onTaskCreated);
-  }, [taskURL]);
+  }, []);
 
   return (
     <div style={{ borderStyle: 'solid', margin: '5px', padding: '5px' }}>
-      current Task URL: {taskURL}
+      current Task URL: {taskURL.url}
       <button
         onClick={() =>
-          setTaskURL(taskURL === '/big-task' ? '/small-task' : '/big-task')
+          setTaskURL(
+            taskURL.url === '/big-task'
+              ? { url: '/small-task' }
+              : { url: '/big-task' }
+          )
         }
       >
         toggle task type
